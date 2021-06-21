@@ -57,7 +57,7 @@ ROOT_URLCONF = 'sabong.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'sabong.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dchri2192ehhoo',
+        'USER': 'ibamdtrznacapt',
+        'PASSWORD': '6173e53784d427e1592d0dacad954c39372ecf96ff05937eda510e9a06d6c1cb',
+        'HOST': 'ec2-54-91-188-254.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 
