@@ -12,12 +12,21 @@ class Index(View):
     context = {'form': form}
 
     def get(self, request, **kwargs):
-        derby_list = Derby.objects.filter(user_id=request.user.id).order_by('-id')
+        derby_count = Derby.objects.filter(user_id=request.user.id).count()
+        if(derby_count > 0):
+            derby_list = Derby.objects.filter(user_id=request.user.id).order_by('-id')
+        else:
+            derby_list = Derby.objects.filter(user_id=1).order_by('-id')
         self.context = {'form': DerbyRegistration(), 'derby_list': derby_list}
         return render(request, template_name=self.template_name, context=self.context)
 
     def post(self, request, **kwargs):
-        derby_list = Derby.objects.filter(user_id=request.user.id).order_by('-id')
+        derby_count = Derby.objects.filter(user_id=request.user.id).count()
+        if(derby_count > 0):
+            derby_list = Derby.objects.filter(user_id=request.user.id).order_by('-id')
+        else:
+            derby_list = Derby.objects.filter(user_id=1).order_by('-id')
+
         self.form = DerbyRegistration(request.POST)
         self.context = {'form': self.form, 'derby_list': derby_list}
         print(self.form.is_valid())
@@ -43,7 +52,12 @@ class DerbyEntry(View):
     context = {}
 
     def get(self, request, **kwargs):
-        entry_list = Entry.objects.filter(user_id=request.user.id, tournament_id=kwargs['derby_id']).order_by('-id')
+        entry_count = Entry.objects.filter(user_id=request.user.id, tournament_id=kwargs['derby_id']).count()
+        if entry_count > 0:
+            entry_list = Entry.objects.filter(user_id=request.user.id, tournament_id=kwargs['derby_id']).order_by('-id')
+        else:
+            entry_list = Entry.objects.filter(user_id=1, tournament_id=kwargs['derby_id']).order_by('-id')
+
         form = EntryRegistration()
         self.context = {'derby': Derby.objects.get(id=kwargs['derby_id']),
                         'form': form, 'entry_list': entry_list}
