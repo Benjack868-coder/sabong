@@ -20,7 +20,7 @@
                                     {%if login_error%}
                                         <div class="alert alert-danger">{{login_error}}</div>
                                     {%endif%}
-                                    <form method="post" action="{% url 'system_app_login' %}" class="user">
+                                    <form method="post" action="{% url 'system_login' %}" class="user">
                                         {% csrf_token %}
                                         <div class="form-group">
                                             <label class="text-primary">Email :</label>
@@ -52,10 +52,10 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="#">Forgot Password?</a>
+                                        <a class="small" href="{% url 'system_recover_account' %}">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="#">Create an Account!</a>
+                                        <a class="small" href="{% url 'system_register' %}">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>
