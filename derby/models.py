@@ -20,7 +20,7 @@ class Entry(models.Model):
     entry_name = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     contact_number = models.CharField(max_length=255)
-    is_member = models.BooleanField(default=False)
+    is_member = models.CharField(max_length=2)
     member_id = models.IntegerField(default=0000)
 
 

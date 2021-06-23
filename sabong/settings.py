@@ -92,17 +92,13 @@ DATABASES = {
         'HOST': 'ec2-54-91-188-254.compute-1.amazonaws.com',
         'PORT': '5432'
     },
-    'sqllite': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'derby',
-        'USER': 'root',
-        'PASSWORD': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'sabong',
+        'USER': 'postgres',
+        'PASSWORD': 'admin',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '5432',
     },
 }
 
