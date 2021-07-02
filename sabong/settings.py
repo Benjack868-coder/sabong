@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'system.apps.SystemConfig',
     'derby.apps.DerbyConfig',
     'member.apps.MemberConfig',
