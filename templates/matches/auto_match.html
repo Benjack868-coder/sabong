@@ -1,0 +1,34 @@
+{% extends 'base/dashboard_base.html'%}
+
+{% block content %}
+    <input type="hidden" id="socket_url" value="ws://localhost:8000{{request.get_full_path}}"/>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-6">
+            {{B}}
+                <form method="post" action="{{request.get_full_path}}">
+                    {% csrf_token %}
+                    <input type="submit" value="send"/>
+                </form>
+                {{porn}}
+            </div>
+        </div>
+    </div>
+    <script>
+        const chatSocket = new WebSocket(document.getElementById('socket_url').value);
+        chatSocket.onopen = function(){
+            setInterval(function(){
+                chatSocket.send('hahaha')
+            },1000)
+        }
+
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data)
+            console.log(data)
+        }
+
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+    </script>
+{% endblock %}

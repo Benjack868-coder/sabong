@@ -6,5 +6,6 @@ urlpatterns = [
     path('',views.Index.as_view(), name='matches_index'),
     path('<int:derby_id>/',views.Match.as_view(), name='matches_match'),
     path('<int:derby_id>/entry/<int:entry_id>',views.Entrys.as_view(), name='matches_entry'),
+    path('<int:derby_id>/auto-match/', views.AutoMatch.as_view(), name='matches_auto_match'),
     
 ]

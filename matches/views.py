@@ -62,4 +62,11 @@ class Entrys(View):
     def get(self, request, *args, **kwargs):        
         return render(request, self.template_name, self.context)
 
+    
+class AutoMatch(View):
+    template_name = 'matches/auto_match.html'
+    
+    def get(self, request, *args, **kwargs):
+
+        return render(request,template_name=self.template_name, context={})
 

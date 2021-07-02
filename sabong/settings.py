@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'system.apps.SystemConfig',
     'derby.apps.DerbyConfig',
     'member.apps.MemberConfig',
@@ -79,6 +80,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'sabong.wsgi.application'
+ASGI_APPLICATION = "sabong.asgi.application"
 
 
 # Database

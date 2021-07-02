@@ -6,7 +6,7 @@
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card-header">
-                        {{derby.name}}
+                        {{derby.name}} <a class="btn btn-primary btn-sm float-right" href="{% url 'matches_auto_match' derby_id=derby.id %}" target="_blank">Perform Auto Match</a>
                     </div>
                     <div class="card-body">
                         {%for entry in entrys%}
