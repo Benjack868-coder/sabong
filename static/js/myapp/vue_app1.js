@@ -97,7 +97,7 @@ Vue.component('show-members-dialog', {
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <input @keyup.enter="searchOwner($event, )" type="text" class="form-control rounded-0" placeholder="Search owner...."/>
+                                    <input @keyup="searchOwner($event, )" type="text" class="form-control rounded-0" placeholder="Search owner...."/>
                                 </div>
                             </div>
                             <div class="row">

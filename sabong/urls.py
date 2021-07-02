@@ -22,4 +22,5 @@ urlpatterns = [
     path('',include('system.urls')),
     path('derby/', include('derby.urls')),
     path('member/', include('member.urls')),
+    path('matches/', include('matches.urls'))
 ]

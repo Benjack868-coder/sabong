@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'system.apps.SystemConfig',
     'derby.apps.DerbyConfig',
     'member.apps.MemberConfig',
+    'matches.apps.MatchesConfig',
 ]
 
 MIDDLEWARE = [

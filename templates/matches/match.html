@@ -1,0 +1,51 @@
+{% extends 'base/dashboard_base.html'%}
+{%load derby_extras%}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-header">
+                        {{derby.name}}
+                    </div>
+                    <div class="card-body">
+                        {%for entry in entrys%}
+                            <div class="card-body border-bottom border-primary">
+                                <div class="dropdown no-arrow float-right">
+                                    <a class="dropdown-toggle btn btn-circle btn-sm border-primary" href="#" role="button" id="dropdownMenuLink"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-primary"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                        aria-labelledby="dropdownMenuLink">
+                                        <div class="dropdown-header">Dropdown Header:</div>
+                                        <a class="dropdown-item" href="{% url 'matches_entry' derby_id=derby.id entry_id=entry.id %}">View Entry</a>
+                                        <a class="dropdown-item" href="#">No Fights with</a>
+                                        <div class="dropdown-divider"></div>
+                                        <a class="dropdown-item" href="#">Proceed to auto-match</a>
+                                    </div>
+                                </div>
+                                <div class="align-items-left">
+                                    <div class="text-primary">{{entry.owner}}</div>
+                                    <div>Entry name: {{entry.entry_name}} <spa class="badge badge-info">{{entry.id|total_entry}}</span> </div>
+                                    <div class="text-black-50 small">Contact #: {{entry.contact_number}}</div>
+                                    <div class="text-black-50 small">E-mail : {{entry.email}}</div>
+                                </div>
+                            </div>
+                        {%endfor%}
+                    </div>
+                    <div class="card-footer">
+                        <div class="btn-group btn-group-justified">
+                            {%if entrys.has_previous%}
+                                <a class="btn btn-sm btn-primary" href="{{request.path}}?page={{entrys.previous_page_number}}">Previous</a>
+                            {%endif%}
+                            {%if entrys.has_next%}
+                                <a class="btn btn-sm btn-primary border-left" href="{{request.path}}?page={{entrys.next_page_number}}">Next</a>
+                            {%endif%}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

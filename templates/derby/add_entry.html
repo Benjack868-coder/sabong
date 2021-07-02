@@ -11,7 +11,7 @@
                 {%if success_add_entry%}
                     <div class="alert alert-success">{{success_add_entry}}</div>
                 {%endif%}
-                <form method="POST" action="{% url 'derby_add_entry' derby_id=derby.id %}">
+                <form method="POST" action="{{request.get_full_path}}">
                     {% csrf_token %}
                     <input type="hidden" name="tournament_id" value="{{derby.id}}" >
                     <input type="hidden" name="member_id" value="{{form.member_id.value}}" >
@@ -80,7 +80,7 @@
                 </div>
             </div>
             <div class="card-body">
-                {%for entry in entry_list%}
+                {%for entry in entries%}
                     <div class="card-body border-bottom border-primary">
                         <div class="dropdown no-arrow float-right">
                             <a class="dropdown-toggle btn btn-circle btn-sm border-primary" href="#" role="button" id="dropdownMenuLink"
@@ -104,6 +104,16 @@
                         </div>
                     </div>
                 {%endfor%}
+            </div>
+            <div class="card-footer">
+                <div class="btn-group btn-group-justified">
+                    {%if entries.has_previous%}
+                        <a class="btn btn-sm btn-primary" href="{{request.path}}?page={{entries.previous_page_number}}">Previous</a>
+                    {%endif%}
+                    {%if entries.has_next%}
+                        <a class="btn btn-sm btn-primary border-left" href="{{request.path}}?page={{entries.next_page_number}}">Next</a>
+                    {%endif%}
+                </div>
             </div>
         </div>
     </div>

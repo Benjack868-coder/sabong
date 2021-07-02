@@ -16,12 +16,7 @@ class Index(View):
     def get(self, request, **kwargs):
         page_num = request.GET.get('page', 1)
         form = MemberRegistration()
-        member_count = Members.objects.filter(user_id=request.user.id).count()
-        if member_count > 0:
-            member_list = Members.objects.filter(user_id=request.user.id).order_by('-id')
-        else:
-            member_list = Members.objects.filter(user_id=1).order_by('-id')
-
+        member_list = Members.objects.filter(user_id=request.user.id).order_by('-id')
         paginator = Paginator(member_list, 3)
         total_member = paginator.count
         try:
@@ -36,12 +31,7 @@ class Index(View):
     def post(self, request, **kwargs):
         page_num = request.GET.get('page', 1)
         form = MemberRegistration(request.POST)
-        member_count = Members.objects.filter(user_id=request.user.id).count()
-        if member_count > 0:
-            member_list = Members.objects.filter(user_id=request.user.id).order_by('-id')
-        else:
-            member_list = Members.objects.filter(user_id=1).order_by('-id')
-
+        member_list = Members.objects.filter(user_id=request.user.id).order_by('-id')
         paginator = Paginator(member_list, 3)        
         try:
             members = paginator.page(page_num)
@@ -87,18 +77,14 @@ class ViewMembers(View):
         entry_list = []
         members_list = ''
         if request.GET['action'] == 'ALL':
-            member_count = Members.objects.filter(user_id=request.user.id).count()
-            if member_count > 0:
-                members = Members.objects.filter(user_id=request.user.id).order_by('-owner').values()
-            else:
-                members = Members.objects.filter(user_id=1).order_by('-owner').values()
+            members = Members.objects.filter(user_id=request.user.id).order_by('-owner').values()        
             for member in members:
                 count = Entry.objects.filter(tournament_id=request.GET['tournament_id'], user_id=request.user.id, member_id=member['id']).count()
                 entry_list.append({'id': member['id'], 'owner': member['owner'], 'count': count})
             members_list = list(entry_list)
 
         elif request.GET['action'] == 'SEARCH':
-            members = Members.objects.filter(user_id=request.user.id, owner__contains=request.GET['keywords']).order_by('-owner').values()
+            members = Members.objects.filter(user_id=request.user.id, owner__icontains=request.GET['keywords']).order_by('-owner').values()
             for member in members:
                 count = Entry.objects.filter(tournament_id=request.GET['tournament_id'], user_id=request.user.id,
                                              member_id=member['id']).count()

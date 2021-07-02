@@ -19,10 +19,13 @@ class Index(View):
 class Login(View):
     template_name = 'system/login.html'
     context = {}
-    form = LoginForm()
+
+    def dispatch(self, request, *args, **kwargs):
+        self.context['form'] = LoginForm()
+        return super().dispatch(request, *args, **kwargs)
+    
 
     def get(self, request, **kwargs):
-        self.context = {'form': self.form}
         return render(request, template_name=self.template_name, context=self.context)
 
     def post(self, request, **kwargs):
@@ -33,7 +36,6 @@ class Login(View):
             password = self.form.cleaned_data.get('system_password')
             user = authenticate(request, username=email, password=password)
             if user is not None:
-                pass
                 login(request, user)
                 return redirect('system_index')
             else:
